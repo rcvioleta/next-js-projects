@@ -35,12 +35,13 @@ const eventsSlice = createSlice({
     },
   ],
   reducers: {
-    todoAdded(state, action) {
-      state.push({
-        id: action.payload.id,
-        text: action.payload.text,
-        completed: false,
-      });
+    featuredEvents(state, action) {
+      // state.push({
+      //   id: action.payload.id,
+      //   text: action.payload.text,
+      //   completed: false,
+      // });
+      return state.events;
     },
     todoToggled(state, action) {
       const todo = state.find((todo) => todo.id === action.payload);
@@ -49,5 +50,5 @@ const eventsSlice = createSlice({
   },
 });
 
-export const { todoAdded, todoToggled } = eventsSlice.actions;
+export const { featuredEvents, todoToggled } = eventsSlice.actions;
 export default eventsSlice.reducer;
