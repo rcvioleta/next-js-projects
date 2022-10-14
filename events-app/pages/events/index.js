@@ -1,6 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 
+import EventLists from "../../components/events/event-lists";
+
 const selectedEvents = createSelector(
   (state) => state.events,
   (events) => events.filter((event) => event.isFeatured === true)
@@ -9,20 +11,7 @@ const selectedEvents = createSelector(
 function EventsPage() {
   const featuredEvents = useSelector(selectedEvents);
 
-  return (
-    <>
-      {featuredEvents.map((event) => {
-        return (
-          <div>
-            <h1>{event.title}</h1>
-            <time>{event.data}</time>
-            <address>{event.location}</address>
-            <img src={event.image} alt={event.title} />
-          </div>
-        );
-      })}
-    </>
-  );
+  return <EventLists events={featuredEvents} />;
 }
 
 export default EventsPage;
