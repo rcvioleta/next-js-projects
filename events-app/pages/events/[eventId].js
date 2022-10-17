@@ -1,15 +1,26 @@
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+
+import Layout from "../../components/layouts/layout";
+import EventListItem from "../../components/events/event-list-item";
+import { useEffect, useState } from "react";
 
 function EventPage() {
-  const router = useRouter();
+  // const [event, setEvent] = useState({});
+  const { eventId } = useRouter().query;
+  const events = useSelector((state) => state.events);
+  const event = events.find((event) => event.id === eventId);
 
-  console.log(router.query);
+  console.log("event: ", event);
+  console.log("event id: ", eventId);
 
-  return (
-    <div>
-      <h1>The [eventId].js Page</h1>
-    </div>
-  );
+  let eventComponent = "<p>Loading event...</p>";
+
+  if (event.title) {
+    eventComponent = `This is the title ${event.title}`;
+  }
+
+  return <Layout>{eventComponent}</Layout>;
 }
 
 export default EventPage;

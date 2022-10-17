@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  background-color: aquamarine;
+  height: 8vh;
+  margin: auto;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header > div {
+  flex-basis: 40%;
+  color: black;
+  font-weight: bold;
+}
+
+.header h1,
+.header h2,
+.header h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.header > .browse {
+  text-align: right;
+}
+
+.header > .browse a {
+  text-decoration: underline;
+  color: blue;
+}

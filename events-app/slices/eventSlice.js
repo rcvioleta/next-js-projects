@@ -41,7 +41,6 @@ const eventsSlice = createSlice({
       //   text: action.payload.text,
       //   completed: false,
       // });
-      return state.events;
     },
     todoToggled(state, action) {
       const todo = state.find((todo) => todo.id === action.payload);

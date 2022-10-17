@@ -1,7 +1,8 @@
+import Link from "next/link";
 import styles from "./event-list-item.module.css";
 
 function EventListItem(props) {
-  const { title, date, location, imagePath } = props;
+  const { id, title, date, description, location, imagePath } = props;
 
   const formattedDate = new Date(date).toLocaleDateString("us-EN", {
     year: "numeric",
@@ -11,10 +12,20 @@ function EventListItem(props) {
 
   const formattedAddress = location.replace(", ", "\n");
 
+  let showDescription = "";
+
+  if (description) {
+    showDescription = `
+      <div>
+        <p>${description}</p>
+      </div>
+    `;
+  }
+
   return (
     <div className={styles.container}>
       <div>
-        <img src={imagePath} alt={title} />
+        <img src={`/${imagePath}`} alt={title} />
       </div>
       <div>
         <h1>{title}</h1>
@@ -22,8 +33,11 @@ function EventListItem(props) {
         <div className={styles.address}>
           <address>{formattedAddress}</address>
         </div>
+        {showDescription}
         <div className={styles.link}>
-          <a href="/">Explore Event</a>
+          <Link href={`/events/${id}`}>
+            <a>Explore Event</a>
+          </Link>
         </div>
       </div>
     </div>
