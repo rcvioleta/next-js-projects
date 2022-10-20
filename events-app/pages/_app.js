@@ -1,16 +1,16 @@
 import { Provider } from "react-redux";
 import store from "../store";
 
-import HeaderLayout from "../components/layouts/header";
+import Layout from "../components/layouts/layout";
 
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <HeaderLayout>
+      <Layout>
         <Component {...pageProps} />
-      </HeaderLayout>
+      </Layout>
     </Provider>
   );
 }
