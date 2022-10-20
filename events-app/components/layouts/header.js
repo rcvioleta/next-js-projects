@@ -1,5 +1,5 @@
 import Link from "next/link";
-import classes from "./layout.module.css";
+import classes from "./header.module.css";
 
 function HeaderLayout({ children }) {
   return (

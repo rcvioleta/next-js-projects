@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
-import Layout from "../../components/layouts/layout";
 import EventListItem from "../../components/events/event-list-item";
 import { useEffect, useState } from "react";
 
@@ -20,7 +19,7 @@ function EventPage() {
     eventComponent = `This is the title ${event.title}`;
   }
 
-  return <Layout>{eventComponent}</Layout>;
+  return eventComponent;
 }
 
 export default EventPage;
