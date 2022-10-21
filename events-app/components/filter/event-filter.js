@@ -1,6 +1,10 @@
+import { useState } from "react";
 import classes from "./event-filter.module.css";
 
 function EventFilter(props) {
+  const [selectedMonth, setSelectedMonth] = useState("01");
+  const [selectedYear, setSelectedYear] = useState("2022");
+
   const months = [
     "Jan",
     "Feb",
@@ -18,23 +22,35 @@ function EventFilter(props) {
 
   const years = ["2021", "2022", "2023", "2024", "2025", "2026"];
 
+  const handleFindEvent = () => {
+    alert("find events!");
+  };
+
   return (
     <div className={classes.filter}>
-      <div>
+      <div className={classes.month}>
         <label htmlFor="event-month">Month</label>
-        <select id="event-month">
+        <select
+          id="event-month"
+          value={selectedMonth}
+          onChange={(evt) => setSelectedMonth(evt.target.value)}
+        >
           {months.map((month, index) => {
             return (
-              <option key={index} value={month}>
+              <option key={index} value={`0${index + 1}`.slice(-2)}>
                 {month}
               </option>
             );
           })}
         </select>
       </div>
-      <div>
+      <div className={classes.year}>
         <label htmlFor="event-year">Year</label>
-        <select id="event-year">
+        <select
+          id="event-year"
+          value={selectedYear}
+          onChange={(evt) => setSelectedYear(evt.target.value)}
+        >
           {years.map((year, index) => {
             return (
               <option key={index} value={year}>
@@ -43,6 +59,9 @@ function EventFilter(props) {
             );
           })}
         </select>
+      </div>
+      <div className={classes["find-event"]}>
+        <button onClick={() => handleFindEvent()}>Find Events</button>
       </div>
     </div>
   );
