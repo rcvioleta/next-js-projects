@@ -1,25 +1,41 @@
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
+import store from "../../store/index";
+
 import EventListItem from "../../components/events/event-list-item";
-import { useEffect, useState } from "react";
 
-function EventPage() {
-  // const [event, setEvent] = useState({});
-  const { eventId } = useRouter().query;
-  const events = useSelector((state) => state.events);
-  const event = events.find((event) => event.id === eventId);
+function EventPage({ event }) {
+  return (
+    <>
+      <div>title: {event.title}</div>
+    </>
+  );
+}
 
-  console.log("event: ", event);
-  console.log("event id: ", eventId);
+export async function getStaticPaths() {
+  const paths = store.getState().events.map((event) => {
+    return {
+      params: {
+        eventId: event.id.toString(),
+      },
+    };
+  });
 
-  let eventComponent = "<p>Loading event...</p>";
+  return {
+    paths,
+    fallback: false,
+  };
+}
 
-  if (event.title) {
-    eventComponent = `This is the title ${event.title}`;
-  }
+export async function getStaticProps({ params }) {
+  const event = store.getState().events.find((event) => {
+    return event.id === params.eventId;
+  });
 
-  return eventComponent;
+  return {
+    props: { event },
+  };
 }
 
 export default EventPage;
