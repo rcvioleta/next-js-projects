@@ -1,7 +1,11 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
+
 import classes from "./event-filter.module.css";
 
 function EventFilter(props) {
+  const router = useRouter();
+
   const [selectedMonth, setSelectedMonth] = useState("01");
   const [selectedYear, setSelectedYear] = useState("2022");
 
@@ -23,7 +27,7 @@ function EventFilter(props) {
   const years = ["2021", "2022", "2023", "2024", "2025", "2026"];
 
   const handleFindEvent = () => {
-    alert("find events!");
+    router.push(`/events/${selectedYear}/${selectedMonth}`);
   };
 
   return (

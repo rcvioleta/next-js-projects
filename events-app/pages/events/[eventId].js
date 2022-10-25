@@ -1,15 +1,16 @@
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-
 import store from "../../store/index";
 
-import EventListItem from "../../components/events/event-list-item";
+import EventDetails from "../../components/events/event-details";
 
 function EventPage({ event }) {
   return (
-    <>
-      <div>title: {event.title}</div>
-    </>
+    <EventDetails
+      title={event.title}
+      description={event.description}
+      location={event.location}
+      imagePath={event.image}
+      date={event.date}
+    />
   );
 }
 
