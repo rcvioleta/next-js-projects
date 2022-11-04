@@ -1,12 +1,20 @@
+import EventDetails from "../../components/events/event-details";
+
 import store from "../../store/index";
 
-function EventsPage({ event }) {
-  return (
-    <>
-      <h1>{event.title}</h1>
-      <div>{event.description}</div>
-    </>
-  );
+function EventsPage({ events }) {
+  return events.map((event) => {
+    return (
+      <EventDetails
+        key={event.id}
+        title={event.title}
+        imagePath={event.image}
+        date={event.date}
+        location={event.location}
+        description={event.description}
+      />
+    );
+  });
 }
 
 export async function getStaticPaths() {
@@ -48,13 +56,18 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const [year, month] = params.slug;
 
-  const filteredEvent =
-    store.getState().events.find((event) => {
-      return event.date.match(new RegExp(`${year}\-${month}`, "g"));
-    }) || {};
+  const filteredEvents = store.getState().events.filter((event) => {
+    return event.date.match(new RegExp(`${year}\-${month}`, "g"));
+  });
+
+  if (!filteredEvents.length) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
-    props: { event: filteredEvent },
+    props: { events: filteredEvents },
   };
 }
 

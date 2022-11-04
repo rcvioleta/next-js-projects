@@ -1,7 +1,9 @@
+import Image from "next/image";
+
 import classes from "./event-details.module.css";
 
 function EventDetails(props) {
-  const { id, title, date, description, location, imagePath } = props;
+  const { title, date, description, location, imagePath } = props;
 
   const formattedDate = new Date(date).toLocaleDateString("us-EN", {
     year: "numeric",
@@ -14,7 +16,7 @@ function EventDetails(props) {
   return (
     <div className={classes.container}>
       <div>
-        <img src={`/${imagePath}`} alt={title} />
+        <Image src={`/${imagePath}`} alt={title} layout="fill" />
       </div>
       <div>
         <h1>{title}</h1>

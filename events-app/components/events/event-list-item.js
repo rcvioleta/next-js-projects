@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+
 import styles from "./event-list-item.module.css";
 
 function EventListItem(props) {
@@ -25,7 +27,7 @@ function EventListItem(props) {
   return (
     <div className={styles.container}>
       <div>
-        <img src={`/${imagePath}`} alt={title} />
+        <Image src={`/${imagePath}`} alt={title} layout="fill" />
       </div>
       <div>
         <h1>{title}</h1>
